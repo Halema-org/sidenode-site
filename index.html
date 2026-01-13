@@ -48,6 +48,14 @@
         .hero p {
             font-size: 1.5rem;
             opacity: 0.95;
+
+                    .hero-logo {
+            max-width: 600px;
+            width: 90%;
+            height: auto;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
+        }
             max-width: 700px;
             margin: 0 auto 2rem;
         }
@@ -202,6 +210,10 @@
             .hero p {
                 font-size: 1.2rem;
             }
+
+                    .hero-logo {
+                max-width: 400px;
+            }
             
             .security-matrix {
                 grid-template-columns: 1fr;
@@ -212,8 +224,7 @@
 <body>
     <section class="hero">
         <div>
-            <h1>🛡️ Sidenode</h1>
-            <p>AI Ethics Certification & Security Governance Framework</p>
+            <img src="logo.png" alt="Sidenode Logo" class="hero-logo">            <p>AI Ethics Certification & Security Governance Framework</p>
             <div class="cta-buttons">
                 <a href="#security" class="btn btn-primary">Explore Security</a>
                 <a href="#framework" class="btn btn-outline">Learn More</a>

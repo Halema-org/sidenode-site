@@ -3,49 +3,360 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidenode</title>
+    <meta name="description" content="Sidenode - AI Ethics Security Framework & Governance Platform">
+    <title>Sidenode | AI Ethics & Security</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --dark: #1a202c;
+            --light: #f7fafc;
+            --accent: #48bb78;
+            --warning: #f56565;
+        }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            color: var(--dark);
+            background: var(--light);
         }
-        .container {
+        
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
             padding: 2rem;
-            max-width: 600px;
         }
-        h1 {
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+        
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--dark);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .icon {
             font-size: 3rem;
             margin-bottom: 1rem;
-            font-weight: 700;
         }
-        p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
+        
+        .demo-box {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
         }
-        .status {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            display: inline-block;
-            backdrop-filter: blur(10px);
+        
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        
+        .status-good {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+        
+        .status-warning {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+        
+        .security-matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .matrix-item {
+            padding: 1rem;
+            background: #edf2f7;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .threat-demo {
+            background: #fffaf0;
+            border: 2px solid #f6ad55;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .mitigated {
+            background: #f0fff4;
+            border-color: var(--accent);
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .security-matrix {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Sidenode</h1>
-        <p>Welcome to Sidenode</p>
-        <div class="status">✓ Site is live and working</div>
-    </div>
+    <section class="hero">
+        <div>
+            <h1>🛡️ Sidenode</h1>
+            <p>AI Ethics Certification & Security Governance Framework</p>
+            <div class="cta-buttons">
+                <a href="#security" class="btn btn-primary">Explore Security</a>
+                <a href="#framework" class="btn btn-outline">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="security">
+        <h2>Security Posture</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="icon">🔐</div>
+                <h3>Transport Security</h3>
+                <p><span class="status-indicator status-good">✓ Active</span></p>
+                <ul style="margin-top: 1rem; line-height: 2;">
+                    <li>HTTPS/TLS 1.3 enforced</li>
+                    <li>HSTS preload enabled</li>
+                    <li>Certificate pinning ready</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <div class="icon">🛡️</div>
+                <h3>Application Layer</h3>
+                <p><span class="status-indicator status-good">✓ Hardened</span></p>
+                <ul style="margin-top: 1rem; line-height: 2;">
+                    <li>CSP headers configured</li>
+                    <li>XSS protection active</li>
+                    <li>Input validation enforced</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <div class="icon">👁️</div>
+                <h3>Monitoring</h3>
+                <p><span class="status-indicator status-good">✓ Operational</span></p>
+                <ul style="margin-top: 1rem; line-height: 2;">
+                    <li>Real-time threat detection</li>
+                    <li>Automated vulnerability scans</li>
+                    <li>Incident response ready</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="threats" style="background: #f7fafc;">
+        <h2>Interactive Threat Demonstrations</h2>
+        
+        <div class="demo-box threat-demo">
+            <h3>⚠️ XSS Attack Pattern (Unsafe)</h3>
+            <p><strong>Scenario:</strong> Unvalidated user input</p>
+            <code style="background: #fff; padding: 0.5rem; display: block; margin: 1rem 0; border-radius: 4px;">
+                &lt;script&gt;alert('Injected!')&lt;/script&gt;
+            </code>
+            <p><span class="status-indicator status-warning">✗ Vulnerable</span></p>
+        </div>
+        
+        <div class="demo-box threat-demo mitigated">
+            <h3>✅ XSS Mitigation (Secure)</h3>
+            <p><strong>Protection:</strong> Content Security Policy + Input encoding</p>
+            <code style="background: #fff; padding: 0.5rem; display: block; margin: 1rem 0; border-radius: 4px;">
+                Content-Security-Policy: default-src 'self'
+            </code>
+            <p><span class="status-indicator status-good">✓ Protected</span></p>
+        </div>
+        
+        <div class="security-matrix">
+            <div class="matrix-item">
+                <strong>🔓 Weak Password</strong>
+                <p style="margin-top: 0.5rem;">password123 - Cracked in &lt;1 second</p>
+            </div>
+            <div class="matrix-item">
+                <strong>🔒 Strong Password</strong>
+                <p style="margin-top: 0.5rem;">P@ssw0rd$2026!Xy9 - 1000+ years to crack</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="framework">
+        <h2>OWASP Top 10 2025 Coverage</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>A01 - Broken Access Control</h3>
+                <p>Role-based permissions, least-privilege enforcement, comprehensive audit logs</p>
+            </div>
+            <div class="card">
+                <h3>A02 - Cryptographic Failures</h3>
+                <p>TLS 1.3, AES-256 encryption, secure key management, no plaintext storage</p>
+            </div>
+            <div class="card">
+                <h3>A03 - Injection</h3>
+                <p>Parameterized queries, input validation, output encoding, WAF rules</p>
+            </div>
+            <div class="card">
+                <h3>A04 - Insecure Design</h3>
+                <p>Threat modeling, secure SDLC, defense-in-depth architecture</p>
+            </div>
+            <div class="card">
+                <h3>A05 - Security Misconfiguration</h3>
+                <p>Automated hardening, minimal attack surface, security headers enforced</p>
+            </div>
+            <div class="card">
+                <h3>A06 - Vulnerable Components</h3>
+                <p>Dependency scanning, automated updates, SBOM maintenance</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="sidenode-security" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+        <h2 style="color: white;">How Sidenode is Secured</h2>
+        <div class="grid">
+            <div class="card" style="background: rgba(255,255,255,0.1); color: white; border: 2px solid rgba(255,255,255,0.2);">
+                <div class="icon">🌐</div>
+                <h3 style="color: white;">CDN & WAF</h3>
+                <p>Cloudflare protection with bot mitigation, DDoS defense, and rate limiting</p>
+            </div>
+            <div class="card" style="background: rgba(255,255,255,0.1); color: white; border: 2px solid rgba(255,255,255,0.2);">
+                <div class="icon">🔑</div>
+                <h3 style="color: white;">Authentication</h3>
+                <p>Hardware-key MFA, password manager required, unique credentials only</p>
+            </div>
+            <div class="card" style="background: rgba(255,255,255,0.1); color: white; border: 2px solid rgba(255,255,255,0.2);">
+                <div class="icon">💾</div>
+                <h3 style="color: white;">Backup & Recovery</h3>
+                <p>Encrypted off-site backups, tested restore procedures, incident response plan</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="resources">
+        <h2>Security Resources</h2>
+        <div class="demo-box" style="text-align: center;">
+            <p style="font-size: 1.2rem; margin-bottom: 1rem;">Learn more about web application security</p>
+            <div class="cta-buttons">
+                <a href="https://owasp.org/Top10/" target="_blank" rel="noopener" class="btn btn-primary">OWASP Top 10</a>
+                <a href="https://cheatsheetseries.owasp.org/" target="_blank" rel="noopener" class="btn btn-outline" style="color: var(--primary); border-color: var(--primary);">Security Cheat Sheets</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Sidenode | AI Ethics & Security Governance</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">A project of Halema Foundation</p>
+    </footer>
 </body>
 </html>

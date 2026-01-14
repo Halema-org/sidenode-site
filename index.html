@@ -36,6 +36,8 @@
             justify-content: center;
             text-align: center;
             padding: 2rem;
+                        position: relative;
+            overflow: hidden;
         }
         
         .hero h1 {
@@ -52,7 +54,46 @@
         max-width: 80px;            height: auto;
                                     max-height: 180px;
             margin-bottom: 2rem;
+                                    transform: translateY(24px);
+            opacity: 0;
             filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
+                                    animation: snLogoIn 1.6s ease-out forwards, snGlow 5s ease-in-out infinite;
+
+                        
+        }
+
+                    .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('generated-image (3).png') center/cover no-repeat;
+            animation: snParallax 30s linear infinite alternate;
+            z-index: 0;
+        }
+
+        .hero > div {
+            position: relative;
+            z-index: 1;
+        }
+
+                    @keyframes snParallax {
+            0%   { transform: translate3d(0, 0, 0) scale(1.02); }
+            100% { transform: translate3d(-20px, -10px, 0) scale(1.05); }
+        }
+
+        @keyframes snLogoIn {
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes snGlow {
+            0%, 100% { filter: drop-shadow(0 0 4px rgba(0, 255, 255, 0.4)); }
+            50%      { filter: drop-shadow(0 0 16px rgba(0, 255, 255, 0.9)); }
+        }
+
+                    @media (prefers-reduced-motion: reduce) {
+            .hero-bg,
+            .hero-logo {
+                animation: none;
+            }
         }
             max-width: 700px;
             margin: 0 auto 2rem;
@@ -219,6 +260,7 @@
 </head>
 <body>
     <section class="hero">
+                <div class="hero-bg"></div>
         <div>
             <img src="generated-image (3).png" alt="Sidenode Logo" class="hero-logo">            <p>AI Ethics & Governance</p>
             <div class="cta-buttons">

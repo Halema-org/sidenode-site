@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Identity Provenance Seal (IPS) – Vaus Aslaun</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Public Identity Provenance Seal (IPS) for Vaus Aslaun, defining the canonical master identity statement and high-level legal and media provenance.">
+  <style>
+    :root {
+      color-scheme: dark light;
+      --bg: #050810;
+      --card-bg: #0e172a;
+      --border: #1f2937;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.12);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --text-soft: #6b7280;
+      --pill-bg: #020617;
+      --pill-border: #1f2937;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      line-height: 1.6;
+      background: radial-gradient(circle at top left, #0f172a 0, #020617 45%, #000 100%);
+      color: var(--text-main);
+    }
+    .shell {
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+    .card {
+      width: 100%;
+      max-width: 860px;
+      margin: auto;
+      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.06), transparent 55%), var(--bg);
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      box-shadow:
+        0 40px 120px rgba(15, 23, 42, 0.95),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+      padding: 28px 22px 26px;
+      position: relative;
+      overflow: hidden;
+    }
+    @media (min-width: 768px) {
+      .card {
+        padding: 32px 32px 30px;
+      }
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      opacity: 0.35;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.18), transparent 60%),
+        radial-gradient(circle at 100% 0%, rgba(14, 165, 233, 0.14), transparent 60%),
+        radial-gradient(circle at 50% 100%, rgba(15, 23, 42, 0.9), transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .card-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 3px 11px;
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: linear-gradient(120deg, var(--pill-bg), #020617);
+      border: 1px solid var(--pill-border);
+    }
+    .pill .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #f9fafb, #22c55e);
+      box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+    }
+    .pill strong {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    header {
+      margin-bottom: 22px;
+    }
+    .headline {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 1.7rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 650;
+    }
+    .subject-tag {
+      font-size: 0.78rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--text-muted);
+      background: linear-gradient(120deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.4));
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .subtitle {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+    .subtitle strong {
+      color: var(--text-main);
+    }
+    .grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 18px;
+    }
+    @media (min-width: 840px) {
+      .grid {
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+        gap: 18px;
+      }
+    }
+    .section {
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.96));
+      border-radius: 18px;
+      padding: 14px 14px 12px;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.9);
+    }
+    .section h2 {
+      margin: 0 0 5px;
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+    }
+    .section h3 {
+      margin: 0 0 4px;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+    .section p {
+      margin: 0 0 8px;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+    .field-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 0.9rem;
+    }
+    .field-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 4px 0;
+      border-bottom: 1px dashed rgba(31, 41, 55, 0.8);
+    }
+    .field-list li:last-child {
+      border-bottom: none;
+    }
+    .field-label {
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .field-value {
+      text-align: right;
+      color: var(--text-main);
+    }
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 4px 0 2px;
+      font-size: 0.78rem;
+    }
+    .badge {
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      color: var(--text-muted);
+      background: linear-gradient(125deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.7));
+    }
+    .rules {
+      font-size: 0.86rem;
+      color: var(--text-soft);
+      padding-left: 16px;
+      margin: 0 0 2px;
+    }
+    .rules li {
+      margin-bottom: 3px;
+    }
+    .footer-row {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      padding-top: 10px;
+    }
+    .footer-left strong {
+      color: var(--text-main);
+    }
+    .link-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .link-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      background: linear-gradient(120deg, #020617, #020617);
+      text-decoration: none;
+      color: var(--text-muted);
+    }
+    .link-pill span {
+      font-size: 0.77rem;
+    }
+    .link-pill code {
+      font-size: 0.77rem;
+      color: var(--accent);
+      background: rgba(15, 23, 42, 0.8);
+      padding: 1px 5px;
+      border-radius: 999px;
+      border: 1px solid rgba(30, 64, 175, 0.8);
+    }
+    .link-pill:hover {
+      border-color: var(--accent);
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+<div class="shell">
+  <main class="card">
+    <div class="card-inner">
+
+      <div class="pill-row">
+        <div class="pill">
+          <span class="dot"></span>
+          <span><strong>IPS‑1</strong> master identity statement</span>
+        </div>
+        <div class="pill">
+          <span>Subject</span>
+          <span><strong>Vaus Aslaun</strong></span>
+        </div>
+        <div class="pill">
+          <span>Issuer</span>
+          <span>SideNode (self‑issued)</span>
+        </div>
+      </div>
+
+      <header>
+        <div class="headline">
+          <h1>Identity Provenance Seal</h1>
+          <span class="subject-tag">Canonical identity record</span>
+        </div>
+        <p class="subtitle">
+          This IPS‑1 record is the public, canonical master identity statement for <strong>Vaus Aslaun</strong>.  
+          All legal, media, and institutional descriptions of this subject must be interpreted in light of this statement.
+        </p>
+      </header>
+
+      <div class="grid">
+        <section class="section">
+          <h2>Master identity statement</h2>
+          <h3>Core declaration</h3>
+          <p>
+            Vaus Aslaun was born in Afghanistan and is of Tajik ethnicity; he is not Afghan, but part of the wider Central Asian diaspora.
+            This statement is the authoritative description of his origin and self‑identification.
+          </p>
+
+          <h3>Core identity profile</h3>
+          <ul class="field-list">
+            <li>
+              <span class="field-label">Full name (current)</span>
+              <span class="field-value">Vaus Aslaun</span>
+            </li>
+            <li>
+              <span class="field-label">Birth country</span>
+              <span class="field-value">Afghanistan</span>
+            </li>
+            <li>
+              <span class="field-label">Ethnicity</span>
+              <span class="field-value">Tajik</span>
+            </li>
+            <li>
+              <span class="field-label">National self‑identification</span>
+              <span class="field-value">Not Afghan; Central Asian diaspora</span>
+            </li>
+            <li>
+              <span class="field-label">Current location</span>
+              <span class="field-value">Seattle, Washington, USA</span>
+            </li>
+            <li>
+              <span class="field-label">Primary communities</span>
+              <span class="field-value">Central Asian / Tajik diaspora</span>
+            </li>
+          </ul>
+
+          <h3>Interpretation rules</h3>
+          <ul class="rules">
+            <li>Any external label that conflicts with this statement (for example, describing the subject as Afghan in an ethnic or national sense) is non‑authoritative and must be treated as misframed or incomplete.</li>
+            <li>All specialized IPS records (legal records provenance, media provenance, and related systems) must align with this master statement or explicitly document mismatches as errors in external systems, not changes in the subject’s identity.</li>
+            <li>Updates to this record reflect clarified expression of identity, not retroactive validation of past mislabeling.</li>
+          </ul>
+        </section>
+
+        <section class="section">
+          <h2>Linked IPS records</h2>
+
+          <h3>Legal records provenance (IPS‑2)</h3>
+          <p>
+            IPS‑2 documents how legal and official systems (courts, government files, immigration, background checks) represent this subject
+            and how those records must be interpreted in light of IPS‑1.
+          </p>
+          <div class="badge-row">
+            <span class="badge">Status: maintained privately</span>
+            <span class="badge">Scope: courts, records, state systems</span>
+          </div>
+
+          <h3>Media provenance (IPS‑3)</h3>
+          <p>
+            IPS‑3 tracks how media and public narratives have described this subject and compares those narratives with IPS‑1 and IPS‑2,
+            especially where ethnic or national labels are misapplied or incomplete.
+          </p>
+          <div class="badge-row">
+            <span class="badge">Status: maintained privately</span>
+            <span class="badge">Scope: news, profiles, public narratives</span>
+          </div>
+
+          <h3>Public gateway</h3>
+          <p>
+            This page is the public IPS gateway for the subject. It surfaces only sanitized identity data; sealed IPS records and supporting
+            documentation are held privately by the subject.
+          </p>
+        </section>
+      </div>
+
+      <div class="footer-row">
+        <div class="footer-left">
+          <div><strong>IPS record:</strong> IPS‑1 – Master Identity Statement</div>
+          <div>Created: 2026‑01‑28 · Last updated: 2026‑01‑28 · Issuer: SideNode</div>
+        </div>
+        <div class="link-row">
+          <a class="link-pill" href="/ips/vaus-aslaun.json">
+            <span>Machine‑readable IPS</span>
+            <code>/ips/vaus-aslaun.json</code>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+</body>
+</html>

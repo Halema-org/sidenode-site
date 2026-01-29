@@ -1,0 +1,16 @@
+{
+  "ips_id": "IPS-1",
+  "subject": {
+    "name": "Vaus Aslaun",
+    "birthCountry": "Afghanistan",
+    "ethnicity": "Tajik",
+    "selfIdentification": "Not Afghan; part of the wider Central Asian diaspora",
+    "location": "Seattle, Washington, USA"
+  },
+  "meta": {
+    "issuer": "SideNode",
+    "created": "2026-01-28",
+    "lastUpdated": "2026-01-28",
+    "source": "https://sidenode.org/ips/vaus-aslaun"
+  }
+}
